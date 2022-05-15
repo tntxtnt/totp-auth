@@ -3,6 +3,8 @@
 ## What
 Sample TOTP Authenticator using CryptoPP and SFML using vcpkg
 
+![screenshot](https://github.com/tntxtnt/totp-auth/blob/master/img/screenshot.png)
+
 ## Why
 I want to build my own Google Authenticator, because last I heard Google no longer maintains it.
 
@@ -21,3 +23,6 @@ If you run directy from `totp-auto.exe`, use `ninja-msvc64-rel` preset:
 cmake --preset=ninja-msvc64-rel
 cmake --build --preset=ninja-msvc64-rel
 ```
+
+## Limitations
+No scrolling up/down feature. Currently you can only see top 4 TOTP.
