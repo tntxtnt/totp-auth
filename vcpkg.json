@@ -1,0 +1,8 @@
+{
+  "name": "totp-auth",
+  "version": "0.0.1",
+  "dependencies": [
+    "sfml",
+    "cryptopp"
+  ]
+}
