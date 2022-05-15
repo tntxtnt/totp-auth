@@ -39,6 +39,21 @@
         "CMAKE_CXX_COMPILER": "cl.exe",
         "CMAKE_BUILD_TYPE": "Release"
       }
+    },
+    {
+      "name": "ninja-msys2",
+      "inherits": "base",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "g++"
+      }
+    },
+    {
+      "name": "ninja-msys2-rel",
+      "inherits": "ninja-msys2",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
     }
   ],
   "buildPresets": [
@@ -52,7 +67,13 @@
       "name": "ninja-msvc64-rel",
       "displayName": "Ninja MSVC 64-bit Release",
       "configurePreset": "ninja-msvc64-rel",
-      "description": "Ninja MSVC 64-bit Release ubuild"
+      "description": "Ninja MSVC 64-bit Release build"
+    },
+    {
+      "name": "ninja-msys2-rel",
+      "displayName": "Ninja MSYS2 Release",
+      "configurePreset": "ninja-msys2-rel",
+      "description": "Ninja MSYS2 Release build"
     }
   ]
 }
