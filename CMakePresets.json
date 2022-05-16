@@ -17,9 +17,6 @@
       "inherits": "vcpkg-submodule",
       "generator": "Visual Studio 17 2022",
       "architecture": "x64",
-      "environment": {
-        "VCPKG_DEFAULT_TRIPLET": "x64-windows"
-      },
       "condition": {
         "type": "equals",
         "lhs": "${hostSystemName}",
@@ -61,9 +58,6 @@
       "displayName": "Ninja Ubuntu Release build using vcpkg",
       "inherits": "ninja",
       "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
-      "environment": {
-        "VCPKG_DEFAULT_TRIPLET": "x64-linux-rel"
-      },
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
       }
