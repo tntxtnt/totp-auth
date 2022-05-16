@@ -1,79 +1,95 @@
 {
-  "version": 3,
-  "configurePresets": [
+	"version": 3,
+	"configurePresets": [
     {
-      "name": "base",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "installDir": "${sourceDir}/install/${presetName}"
-    },
+			"name": "base",
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"installDir": "${sourceDir}/install/${presetName}"
+		},
+		{
+			"name": "vcpkg-submodule",
+			"inherits": "base",
+			"toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake"
+		},
+		{
+			"name": "vs2022",
+			"displayName": "Visual Studio 2022 64-bit, using vcpkg as submodule",
+			"inherits": "vcpkg-submodule",
+			"generator": "Visual Studio 17 2022",
+			"architecture": "x64",
+			"environment": {
+				"VCPKG_DEFAULT_TRIPLET": "x64-windows"
+			},
+			"condition": {
+				"type": "equals",
+				"lhs": "${hostSystemName}",
+				"rhs": "Windows"
+			}
+		},
+		{
+			"name": "ninja-msvc64-rel",
+			"displayName": "Ninja MSVC 64-bit Release, using vcpkg as submodule",
+			"inherits": "vcpkg-submodule",
+			"generator": "Ninja",
+			"architecture": {
+				"value": "x64",
+				"strategy": "external"
+			},
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "cl.exe",
+				"CMAKE_BUILD_TYPE": "Release"
+			}
+		},
+		{
+			"name": "ninja",
+			"inherits": "base",
+			"generator": "Ninja",
+			"cacheVariables": {
+				"CMAKE_CXX_COMPILER": "g++"
+			}
+		},
+		{
+			"name": "ninja-msys2-rel",
+			"displayName": "Ninja (MSYS2) Release build",
+			"inherits": "ninja",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release"
+			}
+		},
+		{
+			"name": "ninja-ubuntu-vcpkg-rel",
+			"displayName": "Ninja Ubuntu Release build using vcpkg",
+			"inherits": "ninja",
+			"toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release"
+			}
+		}
+	],
+	"buildPresets": [
     {
-      "name": "vcpkg-submodule",
-      "inherits": "base",
-      "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake"
-    },
-    {
-      "name": "vs2022",
-      "displayName": "Visual Studio 2022 64-bit, using vcpkg as submodule",
-      "inherits": "vcpkg-submodule",
-      "generator": "Visual Studio 17 2022",
-      "architecture": "x64",
-      "environment": {
-        "VCPKG_DEFAULT_TRIPLET": "x64-windows"
-      },
-      "condition": {
-        "type": "equals",
-        "lhs": "${hostSystemName}",
-        "rhs": "Windows"
-      }
-    },
-    {
-      "name": "ninja-msvc64-rel",
-      "displayName": "Ninja MSVC 64-bit Release, using vcpkg as submodule",
-      "inherits": "vcpkg-submodule",
-      "generator": "Ninja",
-      "architecture": {
-        "value": "x64",
-        "strategy": "external"
-      },
-      "cacheVariables": {
-        "CMAKE_CXX_COMPILER": "cl.exe",
-        "CMAKE_BUILD_TYPE": "Release"
-      }
-    },
-    {
-      "name": "ninja-msys2",
-      "inherits": "base",
-      "generator": "Ninja",
-      "cacheVariables": {
-        "CMAKE_CXX_COMPILER": "g++"
-      }
-    },
-    {
-      "name": "ninja-msys2-rel",
-      "inherits": "ninja-msys2",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
-      }
-    }
-  ],
-  "buildPresets": [
-    {
-      "name": "vs2022",
-      "displayName": "Visual Studio 2022 64-bit",
-      "configurePreset": "vs2022",
-      "description": "Visual Studio 2022 64-bit build"
-    },
-    {
-      "name": "ninja-msvc64-rel",
-      "displayName": "Ninja MSVC 64-bit Release",
-      "configurePreset": "ninja-msvc64-rel",
-      "description": "Ninja MSVC 64-bit Release build"
-    },
-    {
-      "name": "ninja-msys2-rel",
-      "displayName": "Ninja MSYS2 Release",
-      "configurePreset": "ninja-msys2-rel",
-      "description": "Ninja MSYS2 Release build"
-    }
-  ]
+			"name": "vs2022",
+			"displayName": "Visual Studio 2022 64-bit",
+			"configurePreset": "vs2022",
+			"description": "Visual Studio 2022 64-bit build"
+		},
+		{
+			"name": "ninja-msvc64-rel",
+			"displayName": "Ninja MSVC 64-bit Release",
+			"configurePreset": "ninja-msvc64-rel",
+			"description": "Ninja MSVC 64-bit Release build"
+		},
+		{
+			"name": "ninja-msys2-rel",
+			"displayName": "Ninja (MSYS2) Release build",
+			"configurePreset": "ninja-msys2-rel",
+			"description": "Ninja MSYS2 Release build"
+		},
+		{
+			"name": "ninja-ubuntu-vcpkg-rel",
+			"displayName": "Ninja Ubuntu Release build using vcpkg",
+			"configurePreset": "ninja-ubuntu-vcpkg-rel",
+			"description": "Ninja Ubuntu Release build using vcpkg"
+		}
+	]
 }

@@ -1,7 +1,7 @@
 # TOTP Authenticator
 
 ## What
-Sample TOTP Authenticator using CryptoPP and SFML using vcpkg
+Sample TOTP Authenticator using CryptoPP and SFML
 
 ![screenshot](https://github.com/tntxtnt/totp-auth/blob/master/img/screenshot.png)
 
