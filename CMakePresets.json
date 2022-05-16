@@ -54,12 +54,12 @@
       }
     },
     {
-      "name": "ninja-ubuntu-vcpkg-rel",
-      "displayName": "Ninja Ubuntu Release build using vcpkg",
-      "inherits": "ninja",
-      "toolchainFile": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+      "name": "ninja-multiconfig-manjaro-vcpkg",
+      "displayName": "Ninja Multi-Config Manjaro build using vcpkg",
+      "inherits": "vcpkg-submodule",
+      "generator": "Ninja Multi-Config",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
+        "CMAKE_CXX_COMPILER": "g++"
       }
     }
   ],
@@ -83,10 +83,10 @@
       "description": "Ninja MSYS2 Release build"
     },
     {
-      "name": "ninja-ubuntu-vcpkg-rel",
-      "displayName": "Ninja Ubuntu Release build using vcpkg",
-      "configurePreset": "ninja-ubuntu-vcpkg-rel",
-      "description": "Ninja Ubuntu Release build using vcpkg"
+      "name": "ninja-multiconfig-manjaro-vcpkg",
+      "displayName": "Ninja Multi-Config Manjaro build using vcpkg",
+      "configurePreset": "ninja-multiconfig-manjaro-vcpkg",
+      "description": "Ninja Multi-Config Manjaro build using vcpkg"
     }
   ]
 }

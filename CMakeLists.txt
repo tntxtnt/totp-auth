@@ -10,6 +10,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
 find_package(cryptopp CONFIG REQUIRED)
+if (UNIX)
+  find_package(OpenGL REQUIRED)
+endif()
 
 add_executable(${PROJECT_NAME} WIN32
   src/main.cpp
@@ -17,9 +20,14 @@ add_executable(${PROJECT_NAME} WIN32
 )
 target_link_libraries(${PROJECT_NAME}
   PRIVATE
-    sfml-system sfml-graphics sfml-window sfml-main
+    sfml-system sfml-graphics sfml-window
     cryptopp-static
 )
+if (UNIX)
+  target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL)
+elseif (WIN32)
+  target_link_libraries(${PROJECT_NAME} PRIVATE sfml-main)
+endif()
 
 # Copy static resources
 file(COPY "res/fonts/RobotoMono-Regular.ttf" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/res/fonts")

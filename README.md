@@ -9,7 +9,7 @@ Sample TOTP Authenticator using CryptoPP and SFML
 I want to build my own Google Authenticator, because last I heard Google no longer maintains it.
 
 ## How
-This project comes with 3 CMake presets: `vs2022`, `ninja-msvc64-rel`, and `ninja-msys2-rel`
+This project comes with 4 CMake presets: `vs2022`, `ninja-msvc64-rel`, `ninja-msys2-rel`, and `ninja-multiconfig-manjaro-vcpkg`
 
 ### Using MSVC
 Configure (in project directory):
@@ -41,7 +41,15 @@ cmake --build --preset ninja-msys2-rel
 ./build/ninja-msys2-rel/totp-auth
 ```
 
-Although I didn't test on Linux yet, I believe that you can also use `ninja-msys2-rel` preset to configure on Linux.
+### Linux builds
+```
+cmake --preset ninja-multiconfig-manjaro-vcpkg
+cmake --build --preset ninja-multiconfig-manjaro-vcpkg --config Release
+./build/ninja-multiconfig-manjaro-vcpkg/Release/totp-auth
+```
+Tested on VirtualBox running Manjaro.
+
+Bug: when the application is closed it throws segmentation fault. I don't know what is it.
 
 ## Limitations
 No scrolling up/down feature. Currently you can only see top 4 TOTP.
